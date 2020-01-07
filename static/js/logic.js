@@ -68,3 +68,40 @@ d3.json(link, function (data) {
         }
     }).addTo(map);
 });
+
+var map = L.map("map", {
+    center: [14.7194, -92.4256],
+    zoom: 5,
+    layers: [out]
+  });
+
+var baseMaps = {
+    Satellite: sat,
+    Light: light,
+    Outdoors: out,
+};
+
+L.control.layers(baseMaps, null, {collapsed: false}).addTo(map);
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend');
+    var grades = [2,4,5,6,7,8];
+    var labels = ["Minor", "Light", "Moderate", "Strong", "Major", "Great"];
+
+    div.innerHTML = "<h4>Richter Scale</h4>";
+  
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + choosecolor(grades[i]) + '"></i>' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+};
+
+legend.addTo(map);
