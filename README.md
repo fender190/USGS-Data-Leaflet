@@ -1,6 +1,6 @@
 # USGS Data Visualization Map
 
-**Click on Link for Map -->:** [USGS Earthquake Data](https://fender190.io/USGS-Data-Leaflet/ "Earthquake Map")
+**Click on Link for Map -->:** [USGS Earthquake Data](https://fender190.github.io/USGS-Data-Leaflet/ "Earthquake Map")
 
 ## Overview
 Visualization USGS earthquake weekly data on a map, to show where most earthquakes concentrate while showing the earthquake's intensity on a ritcher scale.
@@ -8,7 +8,9 @@ Visualization USGS earthquake weekly data on a map, to show where most earthquak
 ## Languages used
 
 -Javascript and it's Leaflet library.
+
 -HTML
+
 -CSS
 
 ## United States Geological Survey Source
