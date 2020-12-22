@@ -8,3 +8,8 @@ body,
 html {
   height: 100%;
 }
+
+.legend {
+  color: antiquewhite;
+  font-size: 20px;
+}
