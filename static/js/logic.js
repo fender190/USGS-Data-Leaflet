@@ -1,3 +1,58 @@
+// set var for site address
+var geoData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+
+
+// center coordinates, Los Angeles
+// Los Angeles, CA is in an earthquake prone area
+var centercoor = [34.0522, -118.2437];
+
+// Features
+d3.json(geoData, data => {
+    createFeatures(data.features);
+});
+
+function createFeatures(earthquakeData){
+    function onEachFeature(feature, layer) {
+        layer.bindPopup(
+            "<h3 align='center'>" +
+            feature.properties.place +
+            "</h3><hr><p><b>Occurrence:</b> " +
+            new Date(feature.properties.time) +
+            "</p>" +
+            "</h3><p><b>Magnitude:</b> " +
+            feature.properties.mag +
+            "</p>"
+        );
+    }
+
+    var earthquakes = L.geoJson(earthquakeData, {
+        onEachFeature: onEachFeature,
+        pointToLayer: (feature, latlng) => {
+            var geojsonMarkerOptions = {
+                radius: 5 * feature.properties.mag,
+                fillColor: getColor(feature.properties.mag),
+                color: "none",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            };
+            return L.circleMarker(latlng, geojsonMarkerOptions);
+        }
+    });
+
+    createMap(earthquakes);
+}
+
+// Map layers
+function createMap(earthquakes) {
+    var lightMap = L.tileLayer(
+        
+    )
+
+}
+
+///////##############
+
 var sat = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
